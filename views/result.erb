@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Do I Need A Haircut?</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <h1>Do I Need A Haircut?</h1>
+    <p class="big">
+    	<% if needed %>
+    	YES
+    	<% else %>
+    	NO
+    	<% end %>
+    </p>
+    <p>
+    	Your last check-in at a hair salon was at <%= venue %> at <%= last %>
+    </p>
+</body>
+</html>
