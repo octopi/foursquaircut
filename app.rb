@@ -7,7 +7,7 @@ get '/redirect_uri' do
 	code = params[:code] # code returned from foursquare
 
 	# exchange code for access token
-	response = HTTParty.get('https://foursquare.com/oauth2/access_token?client_id=ZZFVNTTUWTJQ0O5KJO3VS4R5H114RHOJSPM5MWIVPWWSTK12&client_secret=YOISDBOTYSUTOQPEMHXZD2AH0U5GG2L1EW1CMDIPPZJPIN2N&grant_type=authorization_code&redirect_uri=http://myfsq.herokuapp.com/redirect_uri&code=' + code)
+	response = HTTParty.get('https://foursquare.com/oauth2/access_token?client_id=ZZFVNTTUWTJQ0O5KJO3VS4R5H114RHOJSPM5MWIVPWWSTK12&client_secret=YOISDBOTYSUTOQPEMHXZD2AH0U5GG2L1EW1CMDIPPZJPIN2N&grant_type=authorization_code&redirect_uri=http://foursquaircut.herokuapp.com/redirect_uri&code=' + code)
     access_token = response['access_token']
     puts 'your access_token is ' + access_token
 
