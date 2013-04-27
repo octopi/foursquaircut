@@ -55,3 +55,7 @@ get '/redirect_uri' do
 		erb :result, :locals => { :needed => needed, :last => Time.at(before), :venue => checkin['venue']['name'] }
     end
 end
+
+post '/post' do
+    puts params.to_s
+end
