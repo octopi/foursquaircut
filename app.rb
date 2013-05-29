@@ -68,3 +68,9 @@ get '/find_nearby' do
     results = fsq.search_venues(:ll => params[:lat]+','+params[:lon], :categoryId => '4bf58dd8d48988d110951735').to_json
     results
 end
+
+# USER PUSH
+# showing off user push. simply log whenever a connected user checks in anywhere.
+post '/post' do
+    puts params.to_s
+end
