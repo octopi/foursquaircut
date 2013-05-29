@@ -42,7 +42,7 @@
         lon = pos.coords.longitude;
 
         // call our own server-side endpoint. we do this to avoid exposing client id/secret
-        $.get('find_nearby?lat=' + lat + '&lon=' + lon, function(response) {
+        $.get('find_nearby?lat=' + lat + '&lon=' + lon + '&needed=<%= needed %>', function(response) {
             var venues = JSON.parse(response).groups[0].items;
             var limit = venues.length > 10 ? 10 : venues.length;
             for(var i = 0; i < limit; i++) {

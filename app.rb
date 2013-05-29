@@ -65,7 +65,16 @@ get '/find_nearby' do
     fsq = Foursquare2::Client.new(:client_id => 'ZZFVNTTUWTJQ0O5KJO3VS4R5H114RHOJSPM5MWIVPWWSTK12', :client_secret => 'YOISDBOTYSUTOQPEMHXZD2AH0U5GG2L1EW1CMDIPPZJPIN2N')
     
     # search and return results. exactly the same as what foursquare gives us originally.
-    results = fsq.search_venues(:ll => params[:lat]+','+params[:lon], :categoryId => '4bf58dd8d48988d110951735').to_json
+    puts params[:needed]
+    if params[:needed] == 'true'
+        category = '4bf58dd8d48988d110951735'
+    else
+        category = '4bf58dd8d48988d10f951735'
+    end
+
+    puts 'CATEGORY IS ' + category
+
+    results = fsq.search_venues(:ll => params[:lat]+','+params[:lon], :categoryId => category).to_json
     results
 end
 
