@@ -2,6 +2,7 @@ get '/' do
 	erb :index
 end
 
+# AUTHENTICATION PROCESS
 # see https://developer.foursquare.com/overview/auth for details
 get '/redirect_uri' do
 	code = params[:code] # code returned from foursquare
@@ -54,4 +55,16 @@ get '/redirect_uri' do
     	needed = (now - before).to_i > (86400 * 90) # if it's been more than 90 days, recommend a cut
 		erb :result, :locals => { :needed => needed, :last => Time.at(before), :venue => checkin['venue']['name'] }
     end
+end
+
+# USERLESS VENUE SEARCH
+# find nearby salons or pharmacies, depending on whether or not a haircut is needed
+# the call is done server-side as to not expose client id/secret, but client-side passes in lat/lon
+get '/find_nearby' do
+    # create a new userless client
+    fsq = Foursquare2::Client.new(:client_id => 'ZZFVNTTUWTJQ0O5KJO3VS4R5H114RHOJSPM5MWIVPWWSTK12', :client_secret => 'YOISDBOTYSUTOQPEMHXZD2AH0U5GG2L1EW1CMDIPPZJPIN2N')
+    
+    # search and return results. exactly the same as what foursquare gives us originally.
+    results = fsq.search_venues(:ll => params[:lat]+','+params[:lon], :categoryId => '4bf58dd8d48988d110951735').to_json
+    results
 end

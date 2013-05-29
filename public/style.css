@@ -14,3 +14,12 @@ body {
 	font-size:96px;
 	font-weight: bold;
 }
+
+ul {
+	width: 30%;
+	margin: 0 auto;
+}
+
+#nearby {
+	display: none;
+}

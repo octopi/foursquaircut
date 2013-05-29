@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Do I Need A Haircut?</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 <body>
     <h1>Do I Need A Haircut?</h1>
@@ -17,5 +18,41 @@
     <p>
     	Your last check-in at a hair salon was at <%= venue %> at <%= last %>
     </p>
+        <% if needed %>
+        <div id="nearby">
+            <h2>Salons Nearby</h2>
+            <p>Looks like you need a haircut! Here are some nearby salons.</p>
+            <ul id="results"></ul>
+        </div>
+        
+        <% else %>
+        <div id="nearby">
+            <h2>Pharmacies Nearby</h2>
+            <p>Lookin' good there. Why don't you drop by one of these nearby pharmacies to pick up some shampoo?</p>
+            <ul id="results"></ul>
+        </div>
+        
+        <% end %>
+    </h2>
+
+    <script type="text/javascript">
+    // find nearby venues to recommend to user
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        var lat = pos.coords.latitude,
+        lon = pos.coords.longitude;
+
+        // call our own server-side endpoint. we do this to avoid exposing client id/secret
+        $.get('find_nearby?lat=' + lat + '&lon=' + lon, function(response) {
+            var venues = JSON.parse(response).groups[0].items;
+            var limit = venues.length > 10 ? 10 : venues.length;
+            for(var i = 0; i < limit; i++) {
+                var v = venues[i];
+                $('#results').append('<li><a href="' + v.canonicalUrl + '">' + v.name + '</a></li>');
+            }
+
+            $('#nearby').show();
+        });
+    });
+    </script>
 </body>
 </html>
