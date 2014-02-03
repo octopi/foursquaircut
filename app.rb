@@ -13,7 +13,7 @@ get '/redirect_uri' do
     puts 'your access_token is ' + access_token
 
     # create new authenticated foursquare client
-    fsq = Foursquare2::Client.new(:oauth_token => access_token)
+    fsq = Foursquare2::Client.new(:oauth_token => access_token, :api_version => '20140101')
     
     # variables used in loop
     limit = 250
@@ -62,7 +62,7 @@ end
 # the call is done server-side as to not expose client id/secret, but client-side passes in lat/lon
 get '/find_nearby' do
     # create a new userless client
-    fsq = Foursquare2::Client.new(:client_id => 'ZZFVNTTUWTJQ0O5KJO3VS4R5H114RHOJSPM5MWIVPWWSTK12', :client_secret => 'YOISDBOTYSUTOQPEMHXZD2AH0U5GG2L1EW1CMDIPPZJPIN2N')
+    fsq = Foursquare2::Client.new(:client_id => 'ZZFVNTTUWTJQ0O5KJO3VS4R5H114RHOJSPM5MWIVPWWSTK12', :client_secret => 'YOISDBOTYSUTOQPEMHXZD2AH0U5GG2L1EW1CMDIPPZJPIN2N', :api_version => '20140101')
     
     # search and return results. exactly the same as what foursquare gives us originally.
     puts params[:needed]

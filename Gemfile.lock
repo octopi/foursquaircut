@@ -48,7 +48,7 @@ PLATFORMS
 
 DEPENDENCIES
   foreman
-  foursquare2
+  foursquare2 (>= 1.9.6)
   heroku
   httparty
   json
